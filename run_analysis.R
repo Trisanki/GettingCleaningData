@@ -1,4 +1,5 @@
 library(plyr)
+library(dplyr)
 
 #assign data frames
 features <- read.table("UCI HAR Dataset/features.txt", col.names = c("n","functions"))
@@ -58,6 +59,8 @@ names(TidyData)<-gsub("gravity", "Gravity", names(TidyData))
 FinalData <- TidyData %>%
     group_by(subject, activity) %>%
     summarise_all(funs(mean))
+
+#Create txt file
 write.table(FinalData, "FinalData.txt", row.name=FALSE)
 
 #Check variable names
